@@ -12,11 +12,11 @@ const Login = ({setMessage}) => { // Parámetro pasado desde App.js
         e.preventDefault();
 
         try {
-            const authenticatedUser = await authenticateUser(user, password);
+            const authenticatedUser = await authenticateUser(user, password); // Usuario a autentificar
 
-            if(authenticatedUser) {
+            if(authenticatedUser) { // Coincide
                 setMessage(`¡Bienvenido ${authenticatedUser.name}! :D`);
-            } else {
+            } else { // No coincide
                 setMessage("Correo o contraseña incorrectos.");
             }
         } catch (error) {
@@ -26,7 +26,7 @@ const Login = ({setMessage}) => { // Parámetro pasado desde App.js
         
     }
 
-    // funcion async para el fetch
+    // Función async para el fetch
     async function fetchUsers() {
         try {
             const response = await fetch('https://jsonplaceholder.typicode.com/users');
@@ -38,11 +38,11 @@ const Login = ({setMessage}) => { // Parámetro pasado desde App.js
             return await response.json();
         } catch(error) {
             console.error('Error accediendo al archivo JSON.');
-            throw error
+            throw error;
         }
     }
 
-    async function authenticateUser(user, password) {
+    async function authenticateUser(user, password) { // Función para autentificar los usuarios, asignando nombre de usuario y contraseña
         const users = await fetchUsers();
         
         return users.find(userData => 
